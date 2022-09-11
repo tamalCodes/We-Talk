@@ -4,16 +4,16 @@ import Link from 'next/link';
 
 
 const Header = () => {
-    const categories = [{ name: 'React', slug: 'react' }, { name: 'React', slug: 'react' }, { name: 'React', slug: 'react' }, { name: 'React', slug: 'react' }];
+    const categories = [{ name: 'Login', slug: 'login' }, { name: 'About Us', slug: 'about-us' }, { name: 'Home', slug: 'react' }];
 
 
 
     return (
         <div className="container mx-auto px-10 mb-8">
             <div className="border-b w-full inline-block border-white-800 py-8">
-                <div className="md:float-left block">
+                <div className="text-center sm:float-left">
                     <Link href="/">
-                        <span className="cursor-pointer font-bold text-4xl text-white">Graph CMS</span>
+                        <span className="cursor-pointer font-bold text-4xl text-white">We Talk</span>
                     </Link>
                 </div>
                 <div className="hidden md:float-left md:contents">
