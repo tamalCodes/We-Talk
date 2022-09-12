@@ -1,10 +1,15 @@
 import React from 'react';
-
-import { Categories, PostWidget, Author, Comments, CommentsForm, DetailedPost } from '../../components';
+import { useRouter } from 'next/router';
+import { Categories, PostWidget, Author, Comments, CommentsForm, DetailedPost, Loader } from '../../components';
 import { getPosts, getPostDetails } from '../../services';
 
 const PostDetails = ({ post }) => {
 
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <Loader />;
+    }
 
 
     return (
@@ -50,3 +55,4 @@ export async function getStaticPaths() {
         fallback: true,
     };
 }
+

@@ -7,3 +7,4 @@ export { default as Author } from "./Author";
 export { default as Comments } from "./Comments";
 export { default as CommentsForm } from "./CommentsForm";
 export { default as DetailedPost } from "./DetailedPost";
+export { default as Loader } from "./Loader";

@@ -36,11 +36,16 @@ const PostDetails = ({ post }) => {
                 return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
             case 'image':
                 return (
-                    <img
-                        key={index}
-                        alt='lol'
-                        src={obj.src}
-                    />
+                    <>
+                        <div className='flex items-center justify-center'>
+                            <img
+                                key={index}
+                                alt='lol'
+                                src={obj.src}
+                            />
+                        </div>
+
+                    </>
                 );
             default:
                 return modifiedText;
