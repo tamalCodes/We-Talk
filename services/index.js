@@ -98,7 +98,7 @@ export const getSimilarPosts = async (categories, slug) => {
     }
   `;
   const result = await request(graphqlAPI, query, { slug, categories });
-  return results.postsConnection.edges;
+  return result.postsConnection.edges;
 };
 
 // get all the categories
