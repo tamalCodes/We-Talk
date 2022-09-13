@@ -1,4 +1,5 @@
 // product schema
+
 const mongoose = require("mongoose");
 
 const CommentsSchema = new mongoose.Schema(
@@ -24,5 +25,5 @@ const CommentsSchema = new mongoose.Schema(
 );
 
 // module.exports = mongoose.models.Users || mongoose.model("Users", UserSchema);
-export default mongoose.models.PostComments ||
-  mongoose.model("PostComments", CommentsSchema);
+export default mongoose.models.CommentsSchema ||
+  mongoose.model("CommentsSchema", CommentsSchema);
