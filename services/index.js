@@ -159,30 +159,16 @@ export const getPostDetails = async (slug) => {
 
 //* COMMENTS SECTION
 
-// export const submitComment = async (obj) => {
-//   const result = await fetch("http://localhost:3000/api/comments", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(obj),
-//   });
-
-//   return result.json();
-// };
-
-// axios post request to submit comment
-
 export const submitComment = async (obj) => {
-  try {
-    console.log(obj);
-    const alldata = await Axios.post("http://localhost:3000/api/comments", obj);
+  const result = await fetch("/api/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
 
-    return alldata;
-  } catch (error) {
-    console.log(error);
-    alert("INTERNAL ERROR, PLEASE TRY AGAIN LATER");
-  }
+  return result.json();
 };
 
 export const getComments = async (slug) => {
