@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { PostCard, Categories, PostWidget, Header } from "../components";
 import { getPosts } from "../services";
+import { FeaturedPosts } from "../sections/index";
 
 export default function Home({ posts }) {
   return (
@@ -10,6 +11,8 @@ export default function Home({ posts }) {
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+
+        <FeaturedPosts />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* //* Centered posts */}
