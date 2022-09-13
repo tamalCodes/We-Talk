@@ -6,7 +6,6 @@ import { RichText } from '@graphcms/rich-text-react-renderer';
 import { AiOutlineMinus } from 'react-icons/ai';
 
 const PostDetails = ({ post }) => {
-    console.log(post.content.raw.children);
 
     const getContentFragment = (index, text, obj, type) => {
         let modifiedText = text;
