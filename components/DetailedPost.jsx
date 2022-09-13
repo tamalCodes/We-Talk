@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment';
 import { MdOutlineFiberManualRecord } from 'react-icons/md';
 import { BsList } from 'react-icons/bs';
+import { RichText } from '@graphcms/rich-text-react-renderer';
+import { AiOutlineMinus } from 'react-icons/ai';
 
 const PostDetails = ({ post }) => {
     console.log(post.content.raw.children);
@@ -21,19 +23,26 @@ const PostDetails = ({ post }) => {
             if (obj.underline) {
                 modifiedText = (<u key={index}>{text}</u>);
             }
+
         }
 
         switch (type) {
             case 'heading-one':
-                return <h1 key={index} className="text-3xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h1>;
+                return <h1 key={index} className="text-3xl font-semibold mb-4" style={{ maxWidth: "85%  " }}>{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h1>;
             case 'heading-two':
                 return <h2 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h2>;
             case 'heading-three':
                 return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
             case 'paragraph':
-                return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+                return <p key={index} className="mb-10">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
             case 'heading-four':
                 return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+            case 'bulleted-list':
+                return <ul key={index} className="list-disc ml-10 mb-10">{modifiedText.map((item, i) => <li key={i}>{item}</li>)}</ul>;
+            case 'numbered-list':
+                return <ol key={index} className="list-decimal ml-10 mb-10">{modifiedText.map((item, i) => <li key={i}>{item}</li>)}</ol>;
+
+
             case 'image':
                 return (
                     <>
@@ -85,7 +94,7 @@ const PostDetails = ({ post }) => {
 
                     </div>
 
-                    <div className='flex flex-col items-center justify-center bg-red mb-20'>
+                    <div className='flex flex-col items-center justify-center  mb-20 px-[2rem]'>
                         <div className='border border-gray-300 py-8 px-[6rem] rounded'>
 
                             <div className='flex items-center mb-6'>
@@ -93,12 +102,15 @@ const PostDetails = ({ post }) => {
                                 <h1 className='text-xl font-semibold '>TABLE OF CONTENTS</h1>
                             </div>
 
+                            {/* // CONTENTS */}
                             {post.content.raw.children.map((item, index) => {
                                 if (item.type === 'heading-one') {
                                     return (
-                                        <div key={index} className="flex items-center mb-1 ml-4 ">
-                                            <MdOutlineFiberManualRecord className='mr-2' />
-                                            <h1 className="text-lg font-semibold"> {item.children[0].text}</h1>
+                                        <div key={index} className="flex items-start mb-1 ml-4 ">
+                                            {/* <MdOutlineFiberManualRecord className='mr-2' style={{ color: "gray", fontSize: "2rem" }} /> */}
+                                            {/* <span className='font-semibold mr-2'>-</span> */}
+                                            <AiOutlineMinus className='mr-2 pt-2' />
+                                            <h1 className="text-lg font-normal "> {item.children[0].text}</h1>
 
                                         </div>
                                     );
@@ -106,9 +118,9 @@ const PostDetails = ({ post }) => {
 
                                 if (item.type === 'heading-two' || item.type === 'heading-three' || item.type === 'heading-four' || item.type === 'heading-five' || item.type === 'heading-six') {
                                     return (
-                                        <div key={index} className="flex items-center ml-4 ">
+                                        <div key={index} className="flex items-center ml-5 ">
 
-                                            <h1 className="text-bs font-semibold ml-4 mb-2"> {item.children[0].text}</h1>
+                                            <h1 className="text-bs font-normal ml-4 mb-2"> {item.children[0].text}</h1>
 
                                         </div>
                                     );
@@ -119,11 +131,23 @@ const PostDetails = ({ post }) => {
                         </div>
                     </div>
 
-                    <div className='px-10'>
-                        {post.content.raw.children.map((typeObj, index) => {
-                            const children = typeObj.children.map((item, itemindex) => getContentFragment(itemindex, item.text, item));
-                            return getContentFragment(index, children, typeObj, typeObj.type);
-                        })}
+
+                    {/* //* RICHTEXT HERE */}
+
+                    <div className='px-2 text-center lg:px-10 lg:text-left'>
+
+
+                        <RichText content={post.content.raw.children}
+                            renderers={{
+                                h1: ({ children }) => <h1 className="text-3xl font-semibold mb-4 lg:max-w-[85%] " >{children}</h1>,
+                                h2: ({ children }) => <h2 className="text-xl font-semibold mb-4">{children}</h2>,
+                                h3: ({ children }) => <h3 className="text-lg font-semibold mb-4">{children}</h3>,
+                                img: ({ src }) => <img src={src} alt="" className="object-top h-full w-full object-cover  shadow-lg rounded-t-lg lg:rounded-lg mb-10" />,
+                                p: ({ children }) => <p className="mb-10">{children}</p>,
+                                ul: ({ children }) => <ul className="list-disc ml-6 mb-10 text-left">{children}</ul>,
+                                ol: ({ children }) => <ol className="list-decimal ml-6 mb-10 text-left">{children}</ol>,
+                                bold: ({ children }) => <strong>{children}</strong>,
+                            }} />
                     </div>
 
 
