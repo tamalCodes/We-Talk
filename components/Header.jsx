@@ -1,3 +1,5 @@
+/* eslint-disable no-multiple-empty-lines */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 
 import Link from 'next/link';
